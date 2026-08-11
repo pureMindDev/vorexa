@@ -1,0 +1,108 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-4;
+  margin-bottom: $space-6;
+
+  @include respond(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.statCard {
+  @include card;
+  padding: $space-5;
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $space-3;
+}
+
+.statIcon--purple { background: $purple-tint; color: $purple; }
+.statIcon--amber { background: #FFFBEB; color: #F59E0B; }
+.statIcon--green { background: $accent-tint; color: $accent; }
+.statIcon--blue { background: $primary-tint; color: $primary; }
+
+[data-theme='dark'] .statIcon--purple { background: rgba($purple, 0.15); }
+[data-theme='dark'] .statIcon--amber { background: rgba(#F59E0B, 0.15); }
+[data-theme='dark'] .statIcon--green { background: rgba($accent, 0.15); }
+[data-theme='dark'] .statIcon--blue { background: rgba($primary, 0.15); }
+
+.statValue {
+  font-size: $fs-2xl;
+  font-weight: 700;
+  font-family: $font-heading;
+}
+
+.statLabel {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+}
+
+.card {
+  @include card;
+  padding: $space-6;
+}
+
+.cardHeader {
+  @include flex(row, space-between, center, 0);
+  margin-bottom: $space-4;
+}
+
+.cardTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+}
+
+.link {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bookingItem {
+  @include flex(row, flex-start, center, $space-4);
+  padding: $space-3 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.bookingAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $purple-tint;
+  color: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .bookingAvatar {
+  background: rgba($purple, 0.15);
+}
+
+.bookingTitle {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.bookingMeta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,108 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.filters {
+  @include flex(row, flex-start, center, $space-2);
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+}
+
+.filterChip {
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-secondary);
+
+  &--active {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+
+  @include respond(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  @include card;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    border-color: $primary-light;
+    transform: translateY(-2px);
+  }
+}
+
+.cardBanner {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.cardBody {
+  padding: $space-4;
+}
+
+.cardSubject {
+  font-size: $fs-xs;
+  color: $primary;
+  font-weight: 600;
+  margin-bottom: $space-1;
+}
+
+.cardTitle {
+  font-size: $fs-base;
+  font-weight: 600;
+  margin-bottom: $space-2;
+}
+
+.cardMeta {
+  @include flex(row, space-between, center, 0);
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.progressBar {
+  height: 5px;
+  background: var(--border);
+  border-radius: $radius-full;
+  overflow: hidden;
+  margin-top: $space-3;
+}
+
+.progressFill {
+  height: 100%;
+  background: $accent;
+}

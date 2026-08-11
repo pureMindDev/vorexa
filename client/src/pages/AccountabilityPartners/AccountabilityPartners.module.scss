@@ -1,0 +1,176 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.subtitle {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+  margin-bottom: $space-6;
+}
+
+.requestForm {
+  @include flex(row, flex-start, center, $space-3);
+  margin-bottom: $space-8;
+  flex-wrap: wrap;
+}
+
+.input {
+  @include input-base;
+  flex: 1;
+  min-width: 180px;
+}
+
+.sendBtn {
+  @include flex(row, center, center, $space-2);
+  background: $primary;
+  color: #fff;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-5;
+  font-size: $fs-sm;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    background: $primary-dark;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin: $space-6 0 $space-4;
+}
+
+.card {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-3;
+  @include flex(row, space-between, center, $space-3);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.primaryText {
+  font-weight: 700;
+  font-size: $fs-sm;
+}
+
+.secondaryText {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  gap: $space-2;
+}
+
+.iconBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &--accept {
+    background: $accent;
+    color: #fff;
+  }
+
+  &--decline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: $error;
+  }
+}
+
+.waitingLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.endBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: $error;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-xs;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.partnershipBlock {
+  margin-bottom: $space-3;
+}
+
+.checkInPanel {
+  @include card;
+  padding: $space-4;
+  margin-top: -$space-2;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.checkInComposer {
+  @include flex(row, flex-start, center, $space-2);
+  margin-bottom: $space-4;
+}
+
+.checkInItem {
+  font-size: $fs-sm;
+  padding: $space-2 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.checkInAuthor {
+  font-weight: 700;
+}
+
+.checkInTime {
+  display: block;
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.emptyState,
+.emptyHint {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-4;
+}
+
+.loadingText {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}

@@ -1,0 +1,490 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.room {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: $space-4;
+  height: calc(100vh - 32px);
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+.mainArea {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.roomHeader {
+  @include flex(row, space-between, center, $space-3);
+  margin-bottom: $space-4;
+  flex-shrink: 0;
+}
+
+.roomTitle {
+  font-family: $font-heading;
+  font-size: $fs-lg;
+}
+
+.roomStatus {
+  font-size: $fs-xs;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.startBtn,
+.endBtn {
+  border: none;
+  border-radius: $radius-full;
+  padding: $space-2 $space-5;
+  font-size: $fs-sm;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.startBtn {
+  background: $accent;
+  color: #fff;
+}
+
+.endBtn {
+  background: $error;
+  color: #fff;
+}
+
+.errorInline {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-3;
+}
+
+.errorFull,
+.loadingFull {
+  padding: $space-12;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.videoGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  // Rows were previously sized by each tile's own aspect-ratio, which could demand more
+  // height than the grid actually had room for (e.g. a single wide tile wanting ~500px
+  // tall). Because grid rows default to content-driven sizing, that overflowed the fixed
+  // room height silently — pushing the control bar, chat, and any second participant's
+  // tile below the fold with no visible scrollbar cue pointing at it. Sharing the
+  // available height evenly via 1fr rows (bounded by minmax(0, ...) so they can shrink)
+  // keeps everything inside the viewport instead.
+  grid-auto-rows: minmax(0, 1fr);
+  gap: $space-3;
+  margin-bottom: $space-4;
+  position: relative;
+  min-height: 0;
+  overflow-y: auto; // safety net for many-participant grids rather than blowing out the page
+}
+
+.videoTile {
+  position: relative;
+  background: $sidebar-bg;
+  border-radius: $radius-md;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  min-height: 160px; // floor so a tile never gets crushed to nothing on tall grids
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoPlaceholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: $primary;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: $fs-xl;
+}
+
+.videoLabel {
+  position: absolute;
+  bottom: $space-2;
+  left: $space-2;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: $fs-xs;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: $radius-full;
+}
+
+.unlockAudioBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: $radius-full;
+  padding: $space-2 $space-4;
+  font-size: $fs-xs;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  z-index: 2;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.kickBtn {
+  position: absolute;
+  top: $space-2;
+  right: $space-2;
+  background: rgba($error, 0.85);
+  color: #fff;
+  border: none;
+  border-radius: $radius-full;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity $transition-fast;
+}
+
+.videoTile:hover .kickBtn {
+  opacity: 1;
+}
+
+.reactionLayer {
+  position: relative;
+  height: 0;
+  pointer-events: none;
+}
+
+.floatingReaction {
+  position: absolute;
+  bottom: 0;
+  right: 20%;
+  font-size: 28px;
+  animation: floatUp 2.5s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-120px); opacity: 0; }
+}
+
+.quizBanner {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-4;
+}
+
+.quizQuestion {
+  font-weight: 700;
+  margin-bottom: $space-3;
+}
+
+.quizOptions {
+  @include flex(row, flex-start, center, $space-2);
+  flex-wrap: wrap;
+}
+
+.quizOptionBtn {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: $radius-full;
+  padding: $space-2 $space-4;
+  font-size: $fs-sm;
+  cursor: pointer;
+
+  &--selected {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.quizTally {
+  @include flex(column, flex-start, stretch, $space-2);
+  margin-bottom: $space-3;
+}
+
+.quizTallyRow {
+  @include flex(row, flex-start, center, $space-3);
+  font-size: $fs-sm;
+}
+
+.quizTallyBar {
+  height: 10px;
+  background: $primary;
+  border-radius: $radius-full;
+  transition: width 0.3s;
+}
+
+.endQuizBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-xs;
+  font-weight: 700;
+  color: $error;
+  cursor: pointer;
+}
+
+.controlBar {
+  @include flex(row, center, center, $space-3);
+  padding: $space-3;
+  background: var(--surface);
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+
+  // On narrow screens, wrapping this pill-shaped bar onto multiple rows makes the huge
+  // border-radius round the whole block into an odd blob and eats the screen. Scroll
+  // horizontally as a single compact row instead, like a normal mobile call toolbar.
+  @include respond(sm) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    border-radius: $radius-lg;
+    padding: $space-2;
+    gap: $space-2;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.controlBtn {
+  min-width: 60px;
+  height: 52px;
+  border-radius: $radius-md;
+  border: none;
+  background: var(--surface-alt);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  padding: $space-1 $space-2;
+  flex-shrink: 0;
+
+  @include respond(sm) {
+    min-width: 52px;
+    height: 46px;
+  }
+
+  &--off {
+    background: $error;
+    color: #fff;
+  }
+
+  &--active {
+    background: $primary;
+    color: #fff;
+  }
+
+  &--leave {
+    background: $error;
+    color: #fff;
+    min-width: 76px;
+
+    @include respond(sm) {
+      min-width: 60px;
+    }
+  }
+}
+
+.controlLabel {
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.reactionPicker {
+  @include flex(row, center, center, 2px);
+  border-left: 1px solid var(--border);
+  padding-left: $space-3;
+  flex-shrink: 0;
+}
+
+.reactionBtn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: $space-1;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+// ---- Side panel ----
+.sidePanel {
+  @include card;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.panelTabs {
+  @include flex(row, flex-start, center, $space-2);
+  margin-bottom: $space-4;
+}
+
+.panelTab {
+  width: 34px;
+  height: 34px;
+  border-radius: $radius-sm;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &--active {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
+
+.chatPanel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  @include flex(column, flex-start, stretch, $space-2);
+  margin-bottom: $space-3;
+}
+
+.chatMessage {
+  font-size: $fs-sm;
+  line-height: 1.5;
+}
+
+.chatAuthor {
+  font-weight: 700;
+  color: $primary;
+}
+
+.chatInputBar {
+  @include flex(row, flex-start, center, $space-2);
+}
+
+.chatInput {
+  @include input-base;
+  flex: 1;
+}
+
+.chatSendBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  background: $primary;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.participantsPanel {
+  @include flex(column, flex-start, stretch, $space-2);
+}
+
+.participantRow {
+  font-size: $fs-sm;
+  padding: $space-2 0;
+  border-bottom: 1px solid var(--border);
+}
+
+// ---- Quiz composer modal ----
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  @include card;
+  padding: $space-6;
+  width: 360px;
+  max-width: 90vw;
+}
+
+.modalHeader {
+  @include flex(row, space-between, center, $space-2);
+  font-weight: 700;
+  margin-bottom: $space-4;
+}
+
+.modalInput {
+  @include input-base;
+  width: 100%;
+  margin-bottom: $space-3;
+}
+
+.addOptionBtn {
+  background: none;
+  border: none;
+  color: $primary;
+  font-size: $fs-xs;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: $space-4;
+}
+
+.pushQuizBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+}

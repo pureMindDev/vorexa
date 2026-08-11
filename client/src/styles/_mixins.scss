@@ -1,0 +1,65 @@
+@use 'variables' as *;
+
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  transition: background $transition-base, border-color $transition-base, box-shadow $transition-base, transform $transition-base;
+}
+
+@mixin button-base {
+  font-family: $font-body;
+  font-weight: 600;
+  font-size: $fs-sm;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-6;
+  cursor: pointer;
+  border: none;
+  transition: all $transition-fast;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin input-base {
+  font-family: $font-body;
+  font-size: $fs-base;
+  padding: $space-3 $space-4;
+  border-radius: $radius-sm;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color $transition-fast;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+
+  &::placeholder {
+    color: var(--text-secondary);
+  }
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: 640px) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: 768px) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: 1024px) { @content; }
+  }
+}

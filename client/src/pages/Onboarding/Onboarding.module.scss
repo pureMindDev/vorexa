@@ -1,0 +1,132 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  min-height: 100vh;
+  @include flex(column, flex-start, center, 0);
+  padding: $space-8 $space-4;
+}
+
+.container {
+  width: 100%;
+  max-width: 560px;
+}
+
+.progressTrack {
+  height: 6px;
+  background: var(--border);
+  border-radius: $radius-full;
+  overflow: hidden;
+  margin-bottom: $space-8;
+}
+
+.progressFill {
+  height: 100%;
+  background: $primary;
+  transition: width $transition-base;
+}
+
+.stepLabel {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+  margin-bottom: $space-2;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+  margin-bottom: $space-8;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: $space-8;
+}
+
+.card {
+  @include card;
+  padding: $space-4;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    border-color: $primary-light;
+  }
+
+  &--selected {
+    border-color: $primary;
+    background: $primary-tint;
+  }
+}
+
+[data-theme='dark'] .card--selected {
+  background: rgba($primary, 0.12);
+}
+
+.cardLabel {
+  font-weight: 600;
+  font-size: $fs-base;
+  margin-bottom: $space-1;
+}
+
+.cardDescription {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.chip {
+  @include card;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  font-size: $fs-sm;
+  font-weight: 500;
+
+  &:hover {
+    border-color: $primary-light;
+  }
+
+  &--selected {
+    border-color: $accent;
+    background: $accent-tint;
+    color: $accent-dark;
+  }
+}
+
+[data-theme='dark'] .chip--selected {
+  background: rgba($accent, 0.15);
+  color: $accent-light;
+}
+
+.levelList {
+  @include flex(column, flex-start, stretch, $space-2);
+  margin-bottom: $space-8;
+}
+
+.actions {
+  @include flex(row, space-between, center, $space-3);
+}
+
+.backBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text);
+  }
+}

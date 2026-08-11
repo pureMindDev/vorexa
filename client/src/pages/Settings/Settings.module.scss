@@ -1,0 +1,77 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-6;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: $space-6;
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tabs {
+  @include flex(column, flex-start, stretch, $space-1);
+
+  @include respond(md) {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+}
+
+.tab {
+  padding: $space-3 $space-4;
+  border-radius: $radius-sm;
+  font-size: $fs-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  &--active {
+    background: $primary-tint;
+    color: $primary-dark;
+  }
+}
+
+[data-theme='dark'] .tab--active {
+  background: rgba($primary, 0.15);
+  color: $primary-light;
+}
+
+.panel {
+  @include card;
+  padding: $space-6;
+}
+
+.panelTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-4;
+}
+
+.themeRow {
+  @include flex(row, space-between, center, 0);
+  padding: $space-4;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+}
+
+.themeOption {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.saveBtn {
+  margin-top: $space-4;
+}

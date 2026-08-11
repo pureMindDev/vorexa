@@ -1,0 +1,276 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.tabs {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-6;
+}
+
+.tab {
+  padding: $space-2 $space-5;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+
+  &--active {
+    background: $purple;
+    border-color: $purple;
+    color: #fff;
+  }
+}
+
+.form {
+  @include card;
+  padding: $space-6;
+  margin-bottom: $space-6;
+}
+
+.formRow {
+  display: flex;
+  gap: $space-3;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.label {
+  font-size: $fs-xs;
+  font-weight: 600;
+  display: block;
+  margin-bottom: $space-2;
+}
+
+.input {
+  @include input-base;
+}
+
+.countField {
+  width: 100px;
+  flex: none;
+}
+
+.generateBtn {
+  @include button-base;
+  background: $purple;
+  color: #fff;
+  width: auto;
+  padding-inline: $space-6;
+  height: 46px;
+
+  &:hover {
+    background: $purple-dark;
+  }
+}
+
+// ===== Quiz results =====
+.quizCard {
+  @include card;
+  padding: $space-6;
+  margin-bottom: $space-4;
+}
+
+.quizQuestion {
+  font-size: $fs-base;
+  font-weight: 600;
+  margin-bottom: $space-4;
+}
+
+.quizOptions {
+  @include flex(column, flex-start, stretch, $space-2);
+  margin-bottom: $space-4;
+}
+
+.quizOption {
+  padding: $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  cursor: pointer;
+
+  &--selected {
+    border-color: $primary;
+    background: $primary-tint;
+  }
+
+  &--correct {
+    border-color: $accent;
+    background: $accent-tint;
+    color: $accent-dark;
+  }
+
+  &--wrong {
+    border-color: $error;
+    background: rgba($error, 0.08);
+    color: $error;
+  }
+}
+
+[data-theme='dark'] .quizOption--selected { background: rgba($primary, 0.15); }
+[data-theme='dark'] .quizOption--correct { background: rgba($accent, 0.15); color: $accent-light; }
+
+.explanation {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  padding-top: $space-3;
+  border-top: 1px solid var(--border);
+}
+
+// ===== Flashcards =====
+.flashcardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.flashcard {
+  perspective: 1000px;
+  height: 160px;
+  cursor: pointer;
+}
+
+.flashcardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+
+  &--flipped {
+    transform: rotateY(180deg);
+  }
+}
+
+.flashcardFace {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: $fs-sm;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+
+.flashcardFront {
+  background: $primary-tint;
+  color: $primary-dark;
+}
+
+.flashcardBack {
+  background: $purple-tint;
+  color: $purple-dark;
+  transform: rotateY(180deg);
+}
+
+[data-theme='dark'] .flashcardFront { background: rgba($primary, 0.15); color: $primary-light; }
+[data-theme='dark'] .flashcardBack { background: rgba($purple, 0.15); color: $purple-light; }
+
+.hint {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-bottom: $space-4;
+}
+
+.planDay {
+  @include card;
+  padding: $space-5;
+  margin-bottom: $space-3;
+  @include flex(row, flex-start, flex-start, $space-4);
+}
+
+.dayBadge {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-sm;
+  background: $purple-tint;
+  color: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .dayBadge {
+  background: rgba($purple, 0.15);
+}
+
+.dayNumber {
+  font-size: $fs-lg;
+  line-height: 1;
+}
+
+.dayLabel {
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.dayFocus {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+  margin-bottom: $space-3;
+}
+
+.focusTag {
+  font-size: 10px;
+  font-weight: 700;
+  background: $primary-tint;
+  color: $primary-dark;
+  padding: 3px 9px;
+  border-radius: $radius-full;
+}
+
+[data-theme='dark'] .focusTag {
+  background: rgba($primary, 0.15);
+  color: $primary-light;
+}
+
+.taskList {
+  @include flex(column, flex-start, stretch, $space-1);
+}
+
+.taskItem {
+  font-size: $fs-sm;
+  color: var(--text);
+  padding-left: $space-4;
+  position: relative;
+
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: $primary;
+  }
+}

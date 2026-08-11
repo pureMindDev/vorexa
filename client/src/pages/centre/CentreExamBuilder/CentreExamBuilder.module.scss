@@ -1,0 +1,92 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-6;
+}
+
+.metaRow {
+  @include flex(row, flex-start, center, $space-3);
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+}
+
+.input {
+  @include input-base;
+  flex: 1;
+  min-width: 150px;
+}
+
+.questionCard {
+  @include card;
+  padding: $space-5;
+  margin-bottom: $space-4;
+}
+
+.questionHeader {
+  @include flex(row, space-between, center, $space-2);
+  font-weight: 700;
+  font-size: $fs-sm;
+  margin-bottom: $space-3;
+}
+
+.deleteIcon {
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: $error;
+  }
+}
+
+.questionCard .input {
+  width: 100%;
+  margin-bottom: $space-3;
+}
+
+.optionRow {
+  @include flex(row, flex-start, center, $space-2);
+  margin-bottom: $space-2;
+}
+
+.optionInput {
+  @include input-base;
+  flex: 1;
+  padding: $space-2 $space-3;
+}
+
+.addQuestionBtn {
+  @include flex(row, center, center, $space-2);
+  background: $primary-tint;
+  color: $primary;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-3;
+  width: 100%;
+  font-size: $fs-sm;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: $space-6;
+}
+
+[data-theme='dark'] .addQuestionBtn {
+  background: rgba($primary, 0.15);
+}
+
+.submitBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-4;
+}

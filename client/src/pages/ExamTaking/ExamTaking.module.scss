@@ -1,0 +1,120 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  @include flex(row, space-between, center, 0);
+  margin-bottom: $space-6;
+}
+
+.progress {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+}
+
+.timer {
+  @include flex(row, flex-start, center, $space-2);
+  font-weight: 700;
+  font-size: $fs-lg;
+  color: $primary;
+}
+
+.timer--warning {
+  color: $error;
+}
+
+.questionCard {
+  @include card;
+  padding: $space-6;
+  margin-bottom: $space-6;
+}
+
+.questionText {
+  font-size: $fs-lg;
+  margin-bottom: $space-6;
+  line-height: 1.5;
+}
+
+.options {
+  @include flex(column, flex-start, stretch, $space-3);
+}
+
+.option {
+  @include card;
+  padding: $space-4;
+  cursor: pointer;
+  @include flex(row, flex-start, center, $space-3);
+
+  &:hover {
+    border-color: $primary-light;
+  }
+
+  &--selected {
+    border-color: $primary;
+    background: $primary-tint;
+  }
+}
+
+[data-theme='dark'] .option--selected {
+  background: rgba($primary, 0.15);
+}
+
+.optionLetter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $fs-xs;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.option--selected .optionLetter {
+  background: $primary;
+  border-color: $primary;
+  color: #fff;
+}
+
+.navRow {
+  @include flex(row, space-between, center, $space-3);
+}
+
+.dotRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: $space-6;
+}
+
+.dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $fs-xs;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+
+  &--answered {
+    background: $accent-tint;
+    border-color: $accent;
+    color: $accent-dark;
+  }
+
+  &--current {
+    border-color: $primary;
+    border-width: 2px;
+    color: $primary;
+  }
+}
+
+[data-theme='dark'] .dot--answered {
+  background: rgba($accent, 0.15);
+  color: $accent-light;
+}

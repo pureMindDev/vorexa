@@ -1,0 +1,73 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.wrapper {
+  max-width: 480px;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+
+.scoreCircle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 0 auto $space-6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: $primary-tint;
+  border: 4px solid $primary;
+}
+
+[data-theme='dark'] .scoreCircle {
+  background: rgba($primary, 0.12);
+}
+
+.scoreValue {
+  font-size: $fs-3xl;
+  font-weight: 700;
+  color: $primary;
+}
+
+.scoreLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+  margin-bottom: $space-8;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4;
+  margin-bottom: $space-8;
+}
+
+.statCard {
+  @include card;
+  padding: $space-4;
+}
+
+.statValue {
+  font-size: $fs-lg;
+  font-weight: 700;
+}
+
+.statLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.actions {
+  @include flex(row, center, center, $space-3);
+}

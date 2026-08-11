@@ -1,0 +1,136 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.headerCard {
+  @include card;
+  padding: $space-6;
+  @include flex(row, flex-start, center, $space-4);
+  margin-bottom: $space-6;
+
+  @include respond(sm) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: $primary;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $fs-2xl;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: $fs-xl;
+  font-family: $font-heading;
+  margin-bottom: 4px;
+}
+
+.meta {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.badge {
+  display: inline-block;
+  background: $accent-tint;
+  color: $accent-dark;
+  font-size: $fs-xs;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+  margin-top: $space-2;
+}
+
+[data-theme='dark'] .badge {
+  background: rgba($accent, 0.15);
+  color: $accent-light;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+  margin-bottom: $space-6;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statCard {
+  @include card;
+  padding: $space-4;
+  text-align: center;
+}
+
+.statValue {
+  font-size: $fs-xl;
+  font-weight: 700;
+  color: $primary;
+}
+
+.statLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.section {
+  @include card;
+  padding: $space-6;
+  margin-bottom: $space-4;
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-4;
+}
+
+.subjectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.subjectTag {
+  padding: $space-2 $space-3;
+  border-radius: $radius-full;
+  background: $primary-tint;
+  color: $primary-dark;
+  font-size: $fs-xs;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .subjectTag {
+  background: rgba($primary, 0.15);
+  color: $primary-light;
+}
+
+.row {
+  @include flex(row, space-between, center, 0);
+  padding: $space-3 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.rowLabel {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+}
+
+.rowValue {
+  font-size: $fs-sm;
+  font-weight: 600;
+}

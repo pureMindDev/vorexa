@@ -1,0 +1,71 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-6;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: $space-4;
+  margin-bottom: $space-8;
+}
+
+.statCard {
+  @include card;
+  padding: $space-4;
+}
+
+.statLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: $fs-2xl;
+  font-weight: 700;
+  margin-top: $space-2;
+  font-family: $font-heading;
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-2;
+}
+
+.note {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-bottom: $space-4;
+  max-width: 560px;
+}
+
+.totalPaid {
+  font-weight: 700;
+  font-size: $fs-lg;
+  margin-bottom: $space-4;
+}
+
+.row {
+  @include card;
+  padding: $space-3 $space-4;
+  margin-bottom: $space-2;
+  @include flex(row, space-between, center, $space-3);
+  font-size: $fs-sm;
+}
+
+.emptyState,
+.loadingText {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+}

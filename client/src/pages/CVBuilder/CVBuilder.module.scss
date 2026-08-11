@@ -1,0 +1,236 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  @include flex(row, space-between, center, $space-4);
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.downloadBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+  width: auto;
+  padding-inline: $space-6;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-6;
+
+  @include respond(lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formCard {
+  @include card;
+  padding: $space-5;
+  margin-bottom: $space-4;
+}
+
+.sectionTitle {
+  font-size: $fs-base;
+  font-weight: 700;
+  margin-bottom: $space-4;
+}
+
+.field {
+  margin-bottom: $space-3;
+}
+
+.label {
+  font-size: $fs-xs;
+  font-weight: 600;
+  display: block;
+  margin-bottom: $space-2;
+}
+
+.input {
+  @include input-base;
+}
+
+.textarea {
+  @include input-base;
+  min-height: 70px;
+  resize: vertical;
+  font-family: $font-body;
+}
+
+.row {
+  display: flex;
+  gap: $space-3;
+
+  .field {
+    flex: 1;
+  }
+}
+
+.entryBlock {
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-3;
+  margin-bottom: $space-3;
+  position: relative;
+}
+
+.removeBtn {
+  position: absolute;
+  top: $space-2;
+  right: $space-2;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: $error;
+  }
+}
+
+.addEntryBtn {
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: $radius-sm;
+  padding: $space-2;
+  width: 100%;
+  font-size: $fs-xs;
+  font-weight: 600;
+  color: $primary;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $primary;
+  }
+}
+
+.tagInput {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-2;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.tag {
+  background: var(--surface-alt);
+  border-radius: $radius-full;
+  padding: 4px 10px;
+  font-size: $fs-xs;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tagRemove {
+  cursor: pointer;
+  color: var(--text-secondary);
+
+  &:hover {
+    color: $error;
+  }
+}
+
+// ===== Preview =====
+.previewWrap {
+  @include card;
+  padding: $space-8;
+  color: #0F172A;
+  background: #fff;
+}
+
+.previewName {
+  font-size: $fs-xl;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.previewContact {
+  font-size: $fs-xs;
+  color: #64748B;
+  margin-bottom: $space-5;
+}
+
+.previewSection {
+  margin-bottom: $space-5;
+}
+
+.previewSectionTitle {
+  font-size: $fs-xs;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $primary;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 4px;
+  margin-bottom: $space-3;
+}
+
+.previewEntry {
+  margin-bottom: $space-3;
+}
+
+.previewEntryTitle {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.previewEntryMeta {
+  font-size: $fs-xs;
+  color: #64748B;
+  margin-bottom: 2px;
+}
+
+.previewEntryDesc {
+  font-size: $fs-xs;
+  color: #334155;
+  white-space: pre-line;
+}
+
+.previewTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.previewTag {
+  background: #F1F5F9;
+  color: #334155;
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+@media print {
+  .header, .layout > div:first-child {
+    display: none;
+  }
+  .layout {
+    display: block;
+  }
+  .previewWrap {
+    box-shadow: none;
+    border: none;
+  }
+}

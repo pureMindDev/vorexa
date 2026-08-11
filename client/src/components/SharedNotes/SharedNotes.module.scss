@@ -1,0 +1,120 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: $space-4;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.notesList {
+  @include card;
+  padding: $space-3;
+  align-self: start;
+}
+
+.newNoteBtn {
+  @include flex(row, center, center, $space-2);
+  width: 100%;
+  background: $primary-tint;
+  color: $primary;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-3;
+  font-size: $fs-sm;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: $space-3;
+}
+
+[data-theme='dark'] .newNoteBtn {
+  background: rgba($primary, 0.15);
+}
+
+.noteItem {
+  @include flex(row, space-between, center, $space-2);
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: $fs-sm;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  &--active {
+    background: $primary-tint;
+    color: $primary;
+    font-weight: 600;
+  }
+}
+
+[data-theme='dark'] .noteItem--active {
+  background: rgba($primary, 0.15);
+}
+
+.noteTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deleteIcon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+
+  &:hover {
+    color: $error;
+  }
+}
+
+.editorCard {
+  @include card;
+  padding: $space-6;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorHeader {
+  @include flex(row, space-between, center, $space-2);
+  font-weight: 700;
+  margin-bottom: $space-3;
+}
+
+.savingLabel {
+  font-size: $fs-xs;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.editorTextarea {
+  flex: 1;
+  min-height: 320px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: $fs-sm;
+  line-height: 1.6;
+  font-family: $font-body;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.emptyHint {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-3;
+}

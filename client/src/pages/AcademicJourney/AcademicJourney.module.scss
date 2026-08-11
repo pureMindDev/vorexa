@@ -1,0 +1,232 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.dreamCard {
+  background: $primary-dark;
+  border-radius: $radius-lg;
+  padding: $space-6;
+  color: #fff;
+  margin-bottom: $space-6;
+}
+
+.dreamLabel {
+  font-size: $fs-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  margin-bottom: $space-3;
+}
+
+.dreamRow {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.dreamField {
+  flex: 1;
+  min-width: 180px;
+}
+
+.dreamFieldLabel {
+  font-size: $fs-xs;
+  opacity: 0.85;
+  display: block;
+  margin-bottom: $space-2;
+}
+
+.dreamInput {
+  width: 100%;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: $fs-sm;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.dreamSaveBtn {
+  background: #fff;
+  color: $primary-dark;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-5;
+  font-size: $fs-sm;
+  font-weight: 700;
+  cursor: pointer;
+  height: 38px;
+}
+
+.section {
+  margin-bottom: $space-8;
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-4;
+}
+
+.progressGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-3;
+
+  @include respond(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.progressCard {
+  @include card;
+  padding: $space-4;
+  text-align: center;
+}
+
+.progressExamType {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-bottom: $space-2;
+}
+
+.progressScore {
+  font-size: $fs-xl;
+  font-weight: 700;
+  color: $primary;
+}
+
+.progressMeta {
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.form {
+  @include card;
+  padding: $space-5;
+  margin-bottom: $space-4;
+}
+
+.formRow {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.field {
+  flex: 1;
+  min-width: 160px;
+}
+
+.narrowField {
+  flex: none;
+  width: 160px;
+}
+
+.label {
+  font-size: $fs-xs;
+  font-weight: 600;
+  display: block;
+  margin-bottom: $space-2;
+}
+
+.input {
+  @include input-base;
+}
+
+.addBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+  width: auto;
+  padding-inline: $space-6;
+  height: 46px;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.listItem {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-2;
+  @include flex(row, space-between, center, $space-3);
+}
+
+.listInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.listTitle {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.listMeta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.statusSelect {
+  font-size: $fs-xs;
+  font-weight: 700;
+  padding: $space-1 $space-2;
+  border-radius: $radius-full;
+  border: none;
+  cursor: pointer;
+}
+
+.statusSelect--pending { background: #FFFBEB; color: #B45309; }
+.statusSelect--applied { background: $primary-tint; color: $primary-dark; }
+.statusSelect--admitted { background: $accent-tint; color: $accent-dark; }
+.statusSelect--rejected { background: #FEF2F2; color: #EF4444; }
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: $space-2;
+
+  &:hover {
+    color: $error;
+  }
+}
+
+.cgpaBadge {
+  display: inline-block;
+  background: $accent-tint;
+  color: $accent-dark;
+  font-weight: 700;
+  font-size: $fs-sm;
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  margin-bottom: $space-4;
+}
+
+[data-theme='dark'] .cgpaBadge {
+  background: rgba($accent, 0.15);
+  color: $accent-light;
+}

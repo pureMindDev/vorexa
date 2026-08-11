@@ -1,0 +1,211 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.levelCard {
+  background: $primary;
+  border-radius: $radius-lg;
+  padding: $space-6;
+  color: #fff;
+  margin-bottom: $space-6;
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+
+  @include respond(sm) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.levelBadge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.levelNumber {
+  font-size: $fs-xl;
+  font-weight: 700;
+  font-family: $font-heading;
+}
+
+.levelLabel {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+.levelInfo {
+  flex: 1;
+}
+
+.levelTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-2;
+}
+
+.levelBarTrack {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: $radius-full;
+  overflow: hidden;
+  margin-bottom: $space-2;
+}
+
+.levelBarFill {
+  height: 100%;
+  background: #fff;
+  border-radius: $radius-full;
+  transition: width 0.6s ease;
+}
+
+.levelSub {
+  font-size: $fs-xs;
+  opacity: 0.85;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-3;
+  margin-bottom: $space-6;
+
+  @include respond(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.statCard {
+  @include card;
+  padding: $space-4;
+  text-align: center;
+}
+
+.statValue {
+  font-size: $fs-lg;
+  font-weight: 700;
+  color: $primary;
+}
+
+.statLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-4;
+}
+
+.badgeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+
+  @include respond(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.badgeCard {
+  @include card;
+  padding: $space-5;
+  text-align: center;
+
+  &:not(&--locked):hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &--locked {
+    opacity: 0.45;
+  }
+}
+
+.badgeIcon {
+  font-size: 36px;
+  margin-bottom: $space-3;
+}
+
+.badgeName {
+  font-size: $fs-sm;
+  font-weight: 700;
+  margin-bottom: $space-1;
+}
+
+.badgeDescription {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.badgeDate {
+  font-size: 10px;
+  color: $accent;
+  font-weight: 600;
+  margin-top: $space-2;
+}
+
+.subjectRow {
+  margin-bottom: $space-4;
+}
+
+.subjectHeader {
+  @include flex(row, space-between, center, 0);
+  margin-bottom: $space-2;
+}
+
+.subjectName {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.subjectScore {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.subjectBarTrack {
+  height: 8px;
+  background: var(--border);
+  border-radius: $radius-full;
+  overflow: hidden;
+}
+
+.subjectBarFill {
+  height: 100%;
+  border-radius: $radius-full;
+}
+
+.subjectMeta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}

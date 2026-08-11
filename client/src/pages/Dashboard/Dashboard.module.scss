@@ -1,0 +1,462 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ===== Stats =====
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-4;
+  margin-bottom: $space-6;
+
+  @include respond(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $radius-lg;
+  padding: $space-5;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $space-3;
+}
+
+.statIcon--blue { background: $primary-tint; color: $primary; }
+.statIcon--green { background: $accent-tint; color: $accent; }
+.statIcon--purple { background: $purple-tint; color: $purple; }
+.statIcon--amber { background: #FFFBEB; color: #F59E0B; }
+
+[data-theme='dark'] .statIcon--blue { background: rgba($primary, 0.15); }
+[data-theme='dark'] .statIcon--green { background: rgba($accent, 0.15); }
+[data-theme='dark'] .statIcon--purple { background: rgba($purple, 0.15); }
+[data-theme='dark'] .statIcon--amber { background: rgba(#F59E0B, 0.15); }
+
+.statValue {
+  font-size: $fs-2xl;
+  font-weight: 700;
+  font-family: $font-heading;
+  margin-bottom: 2px;
+}
+
+.statLabel {
+  font-size: $fs-sm;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.statDescription {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+// ===== Dream goal banner =====
+.goalBanner {
+  background: $primary-dark;
+  border-radius: $radius-lg;
+  padding: $space-6;
+  color: #fff;
+  margin-bottom: $space-6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-6;
+
+  @include respond(md) {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+}
+
+.goalLabel {
+  font-size: $fs-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.goalTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-1;
+}
+
+.goalSub {
+  font-size: $fs-sm;
+  opacity: 0.85;
+}
+
+.goalRingWrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+}
+
+.goalPercent {
+  font-size: $fs-2xl;
+  font-weight: 700;
+  font-family: $font-heading;
+}
+
+.goalBarTrack {
+  flex: 1;
+  min-width: 160px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: $radius-full;
+  overflow: hidden;
+
+  @include respond(md) {
+    width: 100%;
+  }
+}
+
+.goalBarFill {
+  height: 100%;
+  background: #fff;
+  border-radius: $radius-full;
+  transition: width 0.6s ease;
+}
+
+// ===== Main grid =====
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $space-4;
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $radius-lg;
+  padding: $space-6;
+  margin-bottom: $space-4;
+}
+
+.cardHeader {
+  @include flex(row, space-between, center, 0);
+  margin-bottom: $space-4;
+}
+
+.cardTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+}
+
+.link {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+// ===== AI Coach =====
+.coachCard {
+  background: $purple-tint;
+  border: 1px solid rgba($purple, 0.15);
+  border-radius: $radius-lg;
+  padding: $space-6;
+  margin-bottom: $space-4;
+}
+
+[data-theme='dark'] .coachCard {
+  background: rgba($purple, 0.12);
+}
+
+.coachHeader {
+  @include flex(row, flex-start, center, $space-3);
+  margin-bottom: $space-3;
+}
+
+.coachIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $purple;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.coachLabel {
+  font-size: $fs-xs;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $purple;
+}
+
+.coachTip {
+  font-size: $fs-sm;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+// ===== Continue learning items =====
+.continueItem {
+  @include flex(row, flex-start, center, $space-4);
+  padding: $space-3 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-sm;
+  background: $primary-tint;
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .thumb {
+  background: rgba($primary, 0.15);
+}
+
+.itemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-size: $fs-sm;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.itemSub {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--border);
+  border-radius: $radius-full;
+  overflow: hidden;
+  width: 100px;
+  margin-top: 6px;
+}
+
+.progressFill {
+  height: 100%;
+  background: $primary;
+}
+
+// ===== Quick actions =====
+.quickActions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-3;
+
+  @include respond(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.quickAction {
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  padding: $space-4;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.quickActionIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto $space-2;
+}
+
+.quickActionLabel {
+  font-size: $fs-xs;
+  font-weight: 600;
+}
+
+// ===== Upcoming list =====
+.upcomingItem {
+  @include flex(row, flex-start, center, $space-3);
+  padding: $space-3 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.upcomingIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.upcomingTitle {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.upcomingMeta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.liveBadge {
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  background: $error;
+  padding: 2px 7px;
+  border-radius: $radius-full;
+  margin-left: auto;
+}
+
+// ===== Friends / Tutors row =====
+.avatarRow {
+  @include flex(row, flex-start, center, 0);
+}
+
+.friendAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  position: relative;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.onlineDot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: $accent;
+  border: 2px solid var(--surface);
+}
+
+.friendsCount {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-left: $space-3;
+}
+
+.tutorCard {
+  @include flex(row, flex-start, center, $space-3);
+  padding: $space-3 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.tutorAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: $purple-tint;
+  color: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: $fs-sm;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .tutorAvatar {
+  background: rgba($purple, 0.15);
+}
+
+.tutorName {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.tutorMeta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.rating {
+  margin-left: auto;
+  font-size: $fs-xs;
+  font-weight: 700;
+  color: #F59E0B;
+}
+
+.mockBadge {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: var(--surface-alt);
+  padding: 2px 8px;
+  border-radius: $radius-full;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}

@@ -1,0 +1,178 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.podium {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: $space-3;
+  margin-bottom: $space-6;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.podiumCard {
+  @include card;
+  padding: $space-5;
+  text-align: center;
+  position: relative;
+}
+
+.podiumCard--1 {
+  border-color: #F59E0B;
+  background: #FFFBEB;
+  order: 2;
+
+  @include respond(sm) { order: 1; }
+}
+
+.podiumCard--2 {
+  border-color: #94A3B8;
+  background: #F8FAFC;
+  order: 1;
+
+  @include respond(sm) { order: 2; }
+}
+
+.podiumCard--3 {
+  border-color: #B45309;
+  background: #FFF7ED;
+  order: 3;
+}
+
+[data-theme='dark'] .podiumCard--1 { background: rgba(#F59E0B, 0.1); }
+[data-theme='dark'] .podiumCard--2 { background: rgba(#94A3B8, 0.1); }
+[data-theme='dark'] .podiumCard--3 { background: rgba(#B45309, 0.15); }
+
+.medal {
+  font-size: 28px;
+  margin-bottom: $space-2;
+}
+
+.podiumAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  margin: 0 auto $space-3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: $fs-lg;
+}
+
+.podiumName {
+  font-size: $fs-sm;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.podiumXp {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.list {
+  @include card;
+  padding: $space-2;
+}
+
+.row {
+  @include flex(row, flex-start, center, $space-4);
+  padding: $space-3 $space-4;
+  border-radius: $radius-sm;
+
+  &--me {
+    background: $primary-tint;
+  }
+}
+
+[data-theme='dark'] .row--me {
+  background: rgba($primary, 0.12);
+}
+
+.rank {
+  width: 28px;
+  text-align: center;
+  font-weight: 700;
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $purple-tint;
+  color: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: $fs-xs;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .avatar {
+  background: rgba($purple, 0.15);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.youTag {
+  font-size: 10px;
+  font-weight: 700;
+  color: $primary;
+  margin-left: $space-2;
+}
+
+.meta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.xp {
+  font-size: $fs-sm;
+  font-weight: 700;
+  color: $primary;
+}
+
+.divider {
+  border-top: 1px dashed var(--border);
+  margin: $space-2 0;
+  text-align: center;
+  position: relative;
+}
+
+.divider span {
+  background: var(--surface);
+  padding: 0 $space-2;
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  position: relative;
+  top: -9px;
+}

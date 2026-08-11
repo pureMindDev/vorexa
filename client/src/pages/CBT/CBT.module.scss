@@ -1,0 +1,178 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.examTypeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-3;
+  margin-bottom: $space-8;
+
+  @include respond(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.examTypeCard {
+  @include card;
+  padding: $space-4;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $primary-light;
+  }
+
+  &--active {
+    border-color: $primary;
+    background: $primary-tint;
+  }
+}
+
+[data-theme='dark'] .examTypeCard--active {
+  background: rgba($primary, 0.12);
+}
+
+.examTypeLabel {
+  font-weight: 600;
+  font-size: $fs-sm;
+}
+
+.section {
+  margin-bottom: $space-6;
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-4;
+}
+
+.subjectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.subjectCard {
+  @include card;
+  padding: $space-4;
+  @include flex(row, space-between, center, 0);
+  cursor: pointer;
+
+  &--selected {
+    border-color: $primary;
+    background: $primary-tint;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+[data-theme='dark'] .subjectCard--selected {
+  background: rgba($primary, 0.12);
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: $radius-sm;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--checked {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
+
+.selectionBar {
+  @include flex(row, space-between, center, $space-3);
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-4;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--surface);
+}
+
+.selectionText {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+
+  strong {
+    color: var(--text);
+  }
+}
+
+.hint {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-bottom: $space-4;
+}
+
+.subjectInfo {
+  @include flex(column, flex-start, flex-start, 2px);
+}
+
+.subjectName {
+  font-weight: 600;
+  font-size: $fs-sm;
+}
+
+.subjectMeta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.startBtn {
+  background: $primary;
+  color: #fff;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-xs;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.resultsCard {
+  @include card;
+  padding: $space-4;
+  @include flex(row, space-between, center, 0);
+  margin-bottom: $space-3;
+}
+
+.resultScore {
+  font-size: $fs-lg;
+  font-weight: 700;
+  color: $accent;
+}

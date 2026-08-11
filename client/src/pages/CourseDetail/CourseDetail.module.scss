@@ -1,0 +1,135 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.back {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: $space-4;
+  display: inline-block;
+}
+
+.header {
+  margin-bottom: $space-6;
+  @include flex(row, space-between, flex-start, $space-4);
+}
+
+.subject {
+  font-size: $fs-xs;
+  color: $primary;
+  font-weight: 600;
+  margin-bottom: $space-1;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.description {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.certificateBanner {
+  background: $purple;
+  border-radius: $radius-lg;
+  padding: $space-5 $space-6;
+  color: #fff;
+  margin-bottom: $space-6;
+  cursor: pointer;
+  @include flex(row, flex-start, center, $space-4);
+}
+
+.certificateIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.certificateTitle {
+  font-weight: 700;
+  font-size: $fs-base;
+}
+
+.certificateSub {
+  font-size: $fs-xs;
+  opacity: 0.9;
+}
+
+.lessonList {
+  @include flex(column, flex-start, stretch, $space-3);
+}
+
+.lessonCard {
+  @include card;
+  padding: $space-4;
+  @include flex(row, space-between, center, $space-3);
+}
+
+.lessonInfo {
+  @include flex(row, flex-start, center, $space-3);
+}
+
+.lessonNumber {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $fs-xs;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  &--completed {
+    background: $accent;
+    color: #fff;
+  }
+}
+
+.lessonTitle {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.lessonMeta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.completeBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-xs;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+
+  &--done {
+    background: $accent-tint;
+    border-color: transparent;
+    color: $accent-dark;
+    cursor: default;
+  }
+}
+
+[data-theme='dark'] .completeBtn--done {
+  background: rgba($accent, 0.15);
+  color: $accent-light;
+}

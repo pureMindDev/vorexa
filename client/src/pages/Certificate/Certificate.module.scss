@@ -1,0 +1,175 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: $space-8 $space-4;
+  @include flex(column, flex-start, center, $space-6);
+}
+
+.backBar {
+  width: 100%;
+  max-width: 800px;
+  @include flex(row, space-between, center, 0);
+}
+
+.back {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.downloadBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+  width: auto;
+  padding-inline: $space-6;
+  @include flex(row, center, center, $space-2);
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.certificate {
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  border: 10px solid #0F172A;
+  border-radius: $radius-lg;
+  padding: $space-12 $space-8;
+  text-align: center;
+  position: relative;
+  color: #0F172A;
+}
+
+.innerBorder {
+  position: absolute;
+  inset: 12px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.logoRow {
+  @include flex(row, center, center, $space-2);
+  margin-bottom: $space-6;
+}
+
+.logoMark {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: $font-heading;
+  font-weight: 700;
+}
+
+.logoText {
+  font-family: $font-heading;
+  font-size: $fs-lg;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.eyebrow {
+  font-size: $fs-xs;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-bottom: $space-4;
+}
+
+.presentedTo {
+  font-size: $fs-sm;
+  color: #64748B;
+  margin-bottom: $space-2;
+}
+
+.studentName {
+  font-family: $font-heading;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: $space-6;
+  border-bottom: 2px solid #E2E8F0;
+  display: inline-block;
+  padding-bottom: $space-3;
+}
+
+.bodyText {
+  font-size: $fs-base;
+  color: #334155;
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto $space-8;
+}
+
+.courseTitle {
+  font-weight: 700;
+  color: $primary;
+}
+
+.footerRow {
+  @include flex(row, space-between, flex-end, 0);
+  margin-top: $space-8;
+  padding-top: $space-6;
+  border-top: 1px solid #E2E8F0;
+
+  @include respond(sm) {
+    flex-direction: column;
+    gap: $space-4;
+    align-items: center;
+  }
+}
+
+.footerBlock {
+  text-align: center;
+}
+
+.footerLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94A3B8;
+  margin-bottom: 2px;
+}
+
+.footerValue {
+  font-size: $fs-sm;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.seal {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #F59E0B;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Print styles: hide chrome, show only the certificate
+@media print {
+  .backBar {
+    display: none;
+  }
+  .page {
+    padding: 0;
+    background: #fff;
+  }
+  .certificate {
+    border-width: 6px;
+    box-shadow: none;
+  }
+}

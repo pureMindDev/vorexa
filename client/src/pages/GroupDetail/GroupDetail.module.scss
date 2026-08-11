@@ -1,0 +1,249 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.back {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: $space-4;
+  display: inline-block;
+}
+
+.header {
+  @include card;
+  padding: $space-6;
+  margin-bottom: $space-6;
+  @include flex(row, space-between, flex-start, $space-4);
+
+  @include respond(sm) {
+    flex-direction: column;
+  }
+}
+
+.groupName {
+  font-size: $fs-xl;
+  font-family: $font-heading;
+  margin-bottom: $space-2;
+}
+
+.groupMeta {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+  margin-bottom: $space-2;
+}
+
+.groupDescription {
+  font-size: $fs-sm;
+  color: var(--text);
+  max-width: 480px;
+}
+
+.joinBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+  width: auto;
+  padding-inline: $space-6;
+  flex-shrink: 0;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.leaveBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: $error;
+  width: auto;
+  padding-inline: $space-6;
+  flex-shrink: 0;
+}
+
+.inviteBox {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-6;
+  background: $purple-tint;
+  border-color: rgba($purple, 0.2);
+}
+
+[data-theme='dark'] .inviteBox {
+  background: rgba($purple, 0.1);
+}
+
+.inviteLabel {
+  font-size: $fs-xs;
+  font-weight: 700;
+  color: $purple;
+  text-transform: uppercase;
+  margin-bottom: $space-2;
+}
+
+.inviteCode {
+  font-family: monospace;
+  font-size: $fs-lg;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $space-4;
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.groupTabs {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+}
+
+.groupTab {
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+  background: var(--surface);
+
+  &--active {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
+
+.feedCard {
+  @include card;
+  padding: $space-6;
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-4;
+}
+
+.composer {
+  @include flex(row, flex-start, flex-start, $space-3);
+  margin-bottom: $space-6;
+}
+
+.composerInput {
+  @include input-base;
+  flex: 1;
+  min-height: 60px;
+  resize: vertical;
+  font-family: $font-body;
+}
+
+.postSendBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+  width: auto;
+  padding-inline: $space-5;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.post {
+  padding: $space-4 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.postHeader {
+  @include flex(row, flex-start, center, $space-3);
+  margin-bottom: $space-2;
+}
+
+.postAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $primary-tint;
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: $fs-xs;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .postAvatar {
+  background: rgba($primary, 0.15);
+}
+
+.postAuthor {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.postTime {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.postContent {
+  font-size: $fs-sm;
+  line-height: 1.5;
+  margin-left: 44px;
+  white-space: pre-line;
+}
+
+.membersCard {
+  @include card;
+  padding: $space-6;
+}
+
+.memberRow {
+  @include flex(row, flex-start, center, $space-3);
+  padding: $space-2 0;
+}
+
+.memberAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $purple-tint;
+  color: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: $fs-xs;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .memberAvatar {
+  background: rgba($purple, 0.15);
+}
+
+.memberName {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.adminTag {
+  font-size: 9px;
+  font-weight: 700;
+  color: $accent;
+  margin-left: $space-2;
+}

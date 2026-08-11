@@ -1,0 +1,190 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: $space-4;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.deckList {
+  @include card;
+  padding: $space-3;
+  align-self: start;
+}
+
+.newDeckForm {
+  @include flex(row, flex-start, center, $space-2);
+  margin-bottom: $space-3;
+}
+
+.newDeckInput {
+  @include input-base;
+  flex: 1;
+  padding: $space-2 $space-3;
+  font-size: $fs-xs;
+}
+
+.newDeckBtn {
+  @include flex(row, center, center, 0);
+  width: 34px;
+  height: 34px;
+  border-radius: $radius-sm;
+  background: $primary;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.deckItem {
+  @include flex(row, space-between, center, $space-2);
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: $fs-sm;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  &--active {
+    background: $purple-tint;
+    color: $purple;
+    font-weight: 600;
+  }
+}
+
+[data-theme='dark'] .deckItem--active {
+  background: rgba($purple, 0.15);
+}
+
+.deckCount {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.studyCard {
+  @include card;
+  padding: $space-6;
+}
+
+.deckTitle {
+  font-family: $font-heading;
+  font-size: $fs-lg;
+  margin-bottom: $space-5;
+}
+
+.flashcard {
+  position: relative;
+  min-height: 180px;
+  background: $primary;
+  color: #fff;
+  border-radius: $radius-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $space-6;
+  font-size: $fs-lg;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: $space-4;
+}
+
+.flashcardFace {
+  max-width: 90%;
+}
+
+.flipHint {
+  position: absolute;
+  bottom: $space-3;
+  right: $space-3;
+  opacity: 0.7;
+}
+
+.cardNav {
+  @include flex(row, center, center, $space-4);
+  margin-bottom: $space-6;
+}
+
+.navBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+.cardCounter {
+  font-size: $fs-sm;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.removeCardBtn {
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: $error;
+  }
+}
+
+.addCardForm {
+  @include flex(row, flex-start, center, $space-2);
+  border-top: 1px solid var(--border);
+  padding-top: $space-5;
+  flex-wrap: wrap;
+}
+
+.addCardInput {
+  @include input-base;
+  flex: 1;
+  min-width: 150px;
+}
+
+.addCardBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+  width: auto;
+  padding-inline: $space-5;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.emptyHint {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-3;
+}

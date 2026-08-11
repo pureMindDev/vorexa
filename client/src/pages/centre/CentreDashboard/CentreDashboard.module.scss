@@ -1,0 +1,93 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.subtitle {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+  margin-bottom: $space-6;
+}
+
+.form {
+  @include card;
+  padding: $space-6;
+  max-width: 480px;
+}
+
+.input {
+  @include input-base;
+  width: 100%;
+  margin-bottom: $space-3;
+}
+
+.textarea {
+  @include input-base;
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: $space-3;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.submitBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: $space-4;
+  margin-bottom: $space-8;
+}
+
+.statCard {
+  @include card;
+  padding: $space-4;
+}
+
+.statLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: $fs-2xl;
+  font-weight: 700;
+  margin-top: $space-2;
+  font-family: $font-heading;
+}
+
+.quickLinks {
+  @include flex(row, flex-start, center, $space-6);
+  flex-wrap: wrap;
+}
+
+.quickLink {
+  color: $primary;
+  font-weight: 700;
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-4;
+}
+
+.loadingText {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}

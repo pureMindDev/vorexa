@@ -1,0 +1,149 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-6;
+}
+
+.childTabs {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+}
+
+.childTab {
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+  background: var(--surface);
+
+  &--active {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: $space-4;
+  margin-bottom: $space-6;
+}
+
+.statCard {
+  @include card;
+  padding: $space-4;
+}
+
+.statLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: $fs-2xl;
+  font-weight: 700;
+  margin-top: $space-2;
+  font-family: $font-heading;
+}
+
+.tabs {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-4;
+}
+
+.tab {
+  padding: $space-2 $space-4;
+  border-radius: $radius-sm;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+  background: var(--surface);
+
+  &--active {
+    background: $primary-tint;
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+[data-theme='dark'] .tab--active {
+  background: rgba($primary, 0.15);
+}
+
+.detailCard {
+  @include card;
+  padding: $space-6;
+}
+
+.miniStatRow {
+  display: flex;
+  gap: $space-8;
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+}
+
+.miniStatValue {
+  font-size: $fs-xl;
+  font-weight: 700;
+  font-family: $font-heading;
+}
+
+.miniStatLabel {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.subheading {
+  font-size: $fs-sm;
+  font-weight: 700;
+  margin-bottom: $space-3;
+}
+
+.row {
+  @include flex(row, space-between, center, $space-3);
+  padding: $space-2 0;
+  border-bottom: 1px solid var(--border);
+  font-size: $fs-sm;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.totalPaid {
+  font-weight: 700;
+  font-size: $fs-lg;
+  margin-bottom: $space-4;
+}
+
+.emptyState,
+.emptyHint,
+.loadingText {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-4;
+}
+
+.link {
+  color: $primary;
+  font-weight: 700;
+}

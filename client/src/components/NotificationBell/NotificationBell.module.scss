@@ -1,0 +1,145 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.wrapper {
+  position: relative;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+  position: relative;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+// Brief pulse when a notification arrives live via socket, so it doesn't feel like a silent poll.
+.pulse {
+  animation: bellPulse 0.6s ease;
+}
+
+@keyframes bellPulse {
+  0% { transform: scale(1); border-color: $primary; }
+  40% { transform: scale(1.15); border-color: $primary; }
+  100% { transform: scale(1); }
+}
+
+.dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: $radius-full;
+  background: $error;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--surface);
+}
+
+.panel {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 340px;
+  max-height: 420px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+  z-index: 100;
+
+  @include respond(sm) {
+    width: 90vw;
+    right: -60px;
+  }
+}
+
+.panelHeader {
+  @include flex(row, space-between, center, 0);
+  padding: $space-4;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+}
+
+.panelTitle {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.markAllBtn {
+  font-size: $fs-xs;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.empty {
+  padding: $space-6;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.item {
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &--unread {
+    background: $primary-tint;
+  }
+}
+
+[data-theme='dark'] .item--unread {
+  background: rgba($primary, 0.1);
+}
+
+.itemTitle {
+  font-size: $fs-xs;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.itemMessage {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.itemTime {
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}

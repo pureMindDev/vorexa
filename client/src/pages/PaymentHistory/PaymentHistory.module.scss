@@ -1,0 +1,50 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-6;
+}
+
+.item {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-3;
+  @include flex(row, space-between, center, $space-3);
+}
+
+.info {
+  flex: 1;
+}
+
+.tutorName {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.meta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.amount {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+  margin-left: $space-3;
+}
+
+.statusBadge--success { background: $accent-tint; color: $accent-dark; }
+.statusBadge--pending { background: #FFFBEB; color: #B45309; }
+.statusBadge--failed { background: #FEF2F2; color: #EF4444; }
+
+[data-theme='dark'] .statusBadge--success { background: rgba($accent, 0.15); }
+[data-theme='dark'] .statusBadge--pending { background: rgba(#F59E0B, 0.15); }
+[data-theme='dark'] .statusBadge--failed { background: rgba(#EF4444, 0.15); }

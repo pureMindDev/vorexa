@@ -1,0 +1,199 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  @include flex(row, space-between, center, $space-4);
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.nav {
+  @include flex(row, flex-start, center, $space-3);
+}
+
+.navBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+.monthLabel {
+  font-size: $fs-base;
+  font-weight: 700;
+  min-width: 140px;
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $space-4;
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid {
+  @include card;
+  padding: $space-4;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: $space-2;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day {
+  aspect-ratio: 1;
+  border-radius: $radius-sm;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: $fs-sm;
+  position: relative;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  &--empty {
+    cursor: default;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  &--today {
+    border-color: $primary;
+    font-weight: 700;
+  }
+
+  &--selected {
+    background: $primary;
+    color: #fff;
+  }
+}
+
+.dayDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: $primary;
+  position: absolute;
+  bottom: 6px;
+}
+
+.day--selected .dayDot {
+  background: #fff;
+}
+
+.sidePanel {
+  @include card;
+  padding: $space-5;
+}
+
+.panelTitle {
+  font-size: $fs-base;
+  font-weight: 700;
+  margin-bottom: $space-4;
+}
+
+.item {
+  @include flex(row, flex-start, center, $space-3);
+  padding: $space-2 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.itemDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.itemDot--task { background: $primary; }
+.itemDot--opportunity { background: $purple; }
+.itemDot--event { background: $accent; }
+
+.itemTitle {
+  font-size: $fs-xs;
+  font-weight: 600;
+}
+
+.itemType {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.form {
+  margin-top: $space-4;
+  padding-top: $space-4;
+  border-top: 1px solid var(--border);
+}
+
+.input {
+  @include input-base;
+  margin-bottom: $space-2;
+  font-size: $fs-xs;
+  padding: $space-2 $space-3;
+}
+
+.addBtn {
+  @include button-base;
+  background: $primary;
+  color: #fff;
+  font-size: $fs-xs;
+  padding-block: $space-2;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}

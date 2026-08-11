@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+
+.toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}

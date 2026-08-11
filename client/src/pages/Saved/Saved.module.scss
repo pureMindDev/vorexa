@@ -1,0 +1,54 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.item {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-3;
+  @include flex(row, flex-start, center, $space-4);
+  cursor: pointer;
+
+  &:hover {
+    border-color: $primary-light;
+  }
+}
+
+.thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-sm;
+  background: $primary-tint;
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .thumb {
+  background: rgba($primary, 0.15);
+}
+
+.itemTitle {
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.itemSub {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,111 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.back {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: $space-4;
+  display: inline-block;
+}
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.meta {
+  font-size: $fs-xs;
+  color: $primary;
+  font-weight: 600;
+  margin-bottom: $space-1;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.duration {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+}
+
+.videoPlaceholder {
+  @include card;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: $space-2;
+  color: var(--text-secondary);
+  margin-bottom: $space-6;
+  background: var(--surface-alt);
+}
+
+.content {
+  @include card;
+  padding: $space-8;
+  margin-bottom: $space-6;
+  font-size: $fs-base;
+  line-height: 1.8;
+  color: var(--text);
+  white-space: pre-line;
+}
+
+.navRow {
+  @include flex(row, space-between, center, $space-3);
+  margin-bottom: $space-8;
+}
+
+.resourceRow {
+  @include flex(row, flex-start, center, $space-3);
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+}
+
+.resourceBtn {
+  @include flex(row, center, center, 0);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-xs;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+.resourceHint {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.progressDots {
+  @include flex(row, center, center, $space-2);
+  margin-bottom: $space-6;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+
+  &--current {
+    background: $primary;
+    width: 20px;
+    border-radius: $radius-full;
+  }
+
+  &--done {
+    background: $accent;
+  }
+}

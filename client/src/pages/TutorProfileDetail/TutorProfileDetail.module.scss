@@ -1,0 +1,176 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.back {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: $space-4;
+  display: inline-block;
+}
+
+.header {
+  @include card;
+  padding: $space-6;
+  margin-bottom: $space-6;
+  @include flex(row, flex-start, flex-start, $space-5);
+
+  @include respond(sm) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: $purple-tint;
+  color: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: $fs-2xl;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .avatar {
+  background: rgba($purple, 0.15);
+}
+
+.name {
+  font-size: $fs-xl;
+  font-family: $font-heading;
+  @include flex(row, flex-start, center, $space-2);
+  margin-bottom: $space-1;
+}
+
+.verifiedBadge {
+  color: $accent;
+}
+
+.rating {
+  font-size: $fs-sm;
+  color: #F59E0B;
+  font-weight: 700;
+  margin-bottom: $space-2;
+}
+
+.bio {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+  margin-bottom: $space-3;
+  max-width: 480px;
+}
+
+.metaRow {
+  display: flex;
+  gap: $space-4;
+  flex-wrap: wrap;
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $space-4;
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  @include card;
+  padding: $space-6;
+  margin-bottom: $space-4;
+}
+
+.sectionTitle {
+  font-size: $fs-lg;
+  font-family: $font-heading;
+  margin-bottom: $space-4;
+}
+
+.subjectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: $space-4;
+}
+
+.subjectTag {
+  font-size: $fs-xs;
+  font-weight: 600;
+  background: $primary-tint;
+  color: $primary-dark;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+}
+
+[data-theme='dark'] .subjectTag {
+  background: rgba($primary, 0.15);
+  color: $primary-light;
+}
+
+.review {
+  padding: $space-4 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.reviewHeader {
+  @include flex(row, space-between, center, 0);
+  margin-bottom: $space-2;
+}
+
+.reviewAuthor {
+  font-size: $fs-sm;
+  font-weight: 700;
+}
+
+.reviewStars {
+  color: #F59E0B;
+  font-size: $fs-xs;
+}
+
+.reviewComment {
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+}
+
+.rateDisplay {
+  font-size: $fs-xl;
+  font-weight: 700;
+  color: $primary;
+  margin-bottom: $space-4;
+}
+
+.bookField {
+  margin-bottom: $space-4;
+}
+
+.bookLabel {
+  font-size: $fs-sm;
+  font-weight: 600;
+  display: block;
+  margin-bottom: $space-2;
+}
+
+.bookInput {
+  @include input-base;
+}
+
+.bookTextarea {
+  @include input-base;
+  min-height: 80px;
+  resize: vertical;
+  font-family: $font-body;
+}

@@ -1,0 +1,78 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.brandSide {
+  background: $primary-dark;
+  color: #fff;
+  @include flex(column, center, flex-start, $space-6);
+  padding: $space-12;
+  position: relative;
+
+  @include respond(md) {
+    display: none;
+  }
+}
+
+.logo {
+  font-family: $font-heading;
+  font-size: $fs-2xl;
+  font-weight: 600;
+}
+
+.tagline {
+  font-size: $fs-lg;
+  max-width: 380px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.formSide {
+  @include flex(column, center, stretch, 0);
+  padding: $space-6;
+  position: relative;
+}
+
+.formWrap {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.topBar {
+  position: absolute;
+  top: $space-6;
+  right: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+  margin-bottom: $space-8;
+}
+
+.footer {
+  margin-top: $space-6;
+  text-align: center;
+  font-size: $fs-sm;
+  color: var(--text-secondary);
+
+  a {
+    color: $primary;
+    font-weight: 600;
+  }
+}

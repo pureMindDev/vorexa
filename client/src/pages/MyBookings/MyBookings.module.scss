@@ -1,0 +1,120 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.back {
+  font-size: $fs-sm;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: $space-4;
+  display: inline-block;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-6;
+}
+
+.tabs {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-6;
+}
+
+.tab {
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+
+  &--active {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
+
+.card {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-3;
+  @include flex(row, space-between, center, $space-3);
+
+  @include respond(sm) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.info {
+  flex: 1;
+}
+
+.subject {
+  font-weight: 700;
+  font-size: $fs-sm;
+}
+
+.meta {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.message {
+  font-size: $fs-xs;
+  color: var(--text);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+}
+
+.statusBadge--pending { background: #FFFBEB; color: #B45309; }
+.statusBadge--accepted { background: $accent-tint; color: $accent-dark; }
+.statusBadge--declined { background: #FEF2F2; color: #EF4444; }
+.statusBadge--completed { background: $primary-tint; color: $primary-dark; }
+
+[data-theme='dark'] .statusBadge--pending { background: rgba(#F59E0B, 0.15); }
+[data-theme='dark'] .statusBadge--accepted { background: rgba($accent, 0.15); }
+[data-theme='dark'] .statusBadge--declined { background: rgba(#EF4444, 0.15); }
+[data-theme='dark'] .statusBadge--completed { background: rgba($primary, 0.15); }
+
+.actions {
+  display: flex;
+  gap: $space-2;
+}
+
+.actionBtn {
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-xs;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.actionBtn--accept {
+  background: $accent;
+  color: #fff;
+}
+
+.actionBtn--decline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: $error;
+}
+
+.actionBtn--complete {
+  background: $primary;
+  color: #fff;
+}

@@ -1,0 +1,144 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: $sidebar-bg;
+  @include flex(column, flex-start, stretch, 0);
+  padding: $space-6 $space-4;
+
+  @include respond(md) {
+    display: none;
+  }
+}
+
+.logoRow {
+  @include flex(row, flex-start, center, $space-2);
+  padding: 0 $space-2;
+  margin-bottom: $space-2;
+}
+
+.logoMark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: $font-heading;
+  font-weight: 700;
+  font-size: $fs-sm;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-family: $font-heading;
+  font-size: $fs-lg;
+  font-weight: 600;
+  color: $sidebar-text-active;
+}
+
+.tutorBadge {
+  font-size: 10px;
+  font-weight: 700;
+  color: $purple-light;
+  background: rgba($purple, 0.2);
+  padding: 3px 8px;
+  border-radius: $radius-full;
+  margin: 0 0 $space-6 $space-2;
+  display: inline-block;
+  width: fit-content;
+}
+
+.nav {
+  @include flex(column, flex-start, stretch, 2px);
+  flex: 1;
+}
+
+.navItem {
+  @include flex(row, flex-start, center, $space-3);
+  padding: $space-3 $space-4;
+  border-radius: $radius-sm;
+  color: $sidebar-text;
+  font-size: $fs-sm;
+  font-weight: 500;
+  transition: background $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $sidebar-bg-hover;
+    color: $sidebar-text-active;
+  }
+
+  &--active {
+    background: rgba($purple, 0.18);
+    color: #C4B5FD;
+  }
+}
+
+.badge {
+  margin-left: auto;
+  background: $error;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: $radius-full;
+}
+
+.footer {
+  border-top: 1px solid $sidebar-border;
+  padding-top: $space-4;
+}
+
+.logoutBtn {
+  @include flex(row, flex-start, center, $space-3);
+  padding: $space-3 $space-4;
+  border-radius: $radius-sm;
+  color: $sidebar-text;
+  font-size: $fs-sm;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background: $sidebar-bg-hover;
+    color: $sidebar-text-active;
+  }
+}
+
+.mobileNav {
+  display: none;
+
+  @include respond(md) {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $sidebar-bg;
+    justify-content: space-around;
+    align-items: center;
+    padding: $space-2 0;
+    z-index: 50;
+  }
+}
+
+.mobileNavItem {
+  @include flex(column, center, center, 2px);
+  color: $sidebar-text;
+  font-size: 10px;
+  font-weight: 500;
+  padding: $space-1 $space-2;
+
+  &--active {
+    color: #C4B5FD;
+  }
+}

@@ -1,0 +1,108 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.header {
+  @include flex(row, space-between, center, $space-3);
+  margin-bottom: $space-6;
+}
+
+.title {
+  font-size: $fs-xl;
+}
+
+.newBtn {
+  @include flex(row, center, center, $space-2);
+  background: $primary;
+  color: #fff;
+  border: none;
+  border-radius: $radius-full;
+  padding: $space-3 $space-5;
+  font-size: $fs-sm;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-3;
+  @include flex(row, space-between, center, $space-3);
+
+  @include respond(sm) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.primaryText {
+  font-weight: 700;
+  font-size: $fs-sm;
+}
+
+.secondaryText {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.actions {
+  @include flex(row, flex-end, center, $space-2);
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+  white-space: nowrap;
+
+  &--published {
+    background: $accent-tint;
+    color: $accent-dark;
+  }
+
+  &--draft {
+    background: var(--surface-alt);
+    color: var(--text-secondary);
+  }
+}
+
+[data-theme='dark'] .badge--published {
+  background: rgba($accent, 0.15);
+}
+
+.actionBtn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  font-size: $fs-xs;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.emptyState,
+.loadingText {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-4;
+}

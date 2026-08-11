@@ -1,0 +1,386 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.pageLayout {
+  display: flex;
+  gap: $space-4;
+  height: calc(100vh - 100px);
+
+  @include respond(md) {
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+.historySidebar {
+  width: 240px;
+  flex-shrink: 0;
+  @include card;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+
+  @include respond(md) {
+    width: 100%;
+    max-height: 200px;
+  }
+}
+
+.newChatBtn {
+  @include button-base;
+  background: $purple;
+  color: #fff;
+  margin-bottom: $space-3;
+
+  &:hover {
+    background: $purple-dark;
+  }
+}
+
+.historyList {
+  flex: 1;
+  overflow-y: auto;
+  @include flex(column, flex-start, stretch, 2px);
+}
+
+.historyItem {
+  @include flex(row, space-between, center, $space-2);
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  &--active {
+    background: $purple-tint;
+    color: $purple-dark;
+  }
+}
+
+[data-theme='dark'] .historyItem--active {
+  background: rgba($purple, 0.15);
+  color: $purple-light;
+}
+
+.historyTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.historyDeleteBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  opacity: 0;
+  flex-shrink: 0;
+
+  .historyItem:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: $error;
+  }
+}
+
+.wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-bottom: $space-4;
+}
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.chatArea {
+  flex: 1;
+  overflow-y: auto;
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-4;
+  @include flex(column, flex-start, stretch, $space-3);
+}
+
+.emptyState {
+  flex: 1;
+  @include flex(column, center, center, $space-2);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  justify-content: center;
+  margin-top: $space-3;
+}
+
+.suggestionChip {
+  padding: $space-2 $space-3;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-size: $fs-xs;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+.message {
+  max-width: 75%;
+  padding: $space-3 $space-4;
+  border-radius: $radius-md;
+  font-size: $fs-sm;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.message--user {
+  align-self: flex-end;
+  background: $primary;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.message--ai {
+  align-self: flex-start;
+  background: var(--surface-alt);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+  max-width: 85%;
+}
+
+.typing {
+  align-self: flex-start;
+  display: flex;
+  gap: 4px;
+  padding: $space-3 $space-4;
+}
+
+.typingInline {
+  display: inline-flex;
+  gap: 4px;
+  padding: $space-1 0;
+}
+
+.markdown {
+  line-height: 1.6;
+
+  p {
+    margin: 0 0 0.6em;
+    &:last-child { margin-bottom: 0; }
+  }
+
+  ul, ol {
+    margin: 0.4em 0 0.8em;
+    padding-left: 1.4em;
+  }
+
+  li {
+    margin-bottom: 0.25em;
+  }
+
+  h1, h2, h3 {
+    font-family: $font-heading;
+    margin: 0.8em 0 0.4em;
+    line-height: 1.3;
+
+    &:first-child { margin-top: 0; }
+  }
+
+  h1 { font-size: 1.15em; }
+  h2 { font-size: 1.08em; }
+  h3 { font-size: 1.02em; }
+
+  strong {
+    font-weight: 700;
+  }
+
+  code {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+  }
+
+  pre {
+    background: rgba(0, 0, 0, 0.08);
+    padding: $space-3;
+    border-radius: $radius-sm;
+    overflow-x: auto;
+    margin: 0.5em 0;
+
+    code {
+      background: none;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding-left: $space-3;
+    margin: 0.5em 0;
+    color: var(--text-secondary);
+  }
+
+  a {
+    color: $primary;
+  }
+}
+
+[data-theme='dark'] .markdown {
+  code, pre {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  animation: bounce 1.2s infinite;
+
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.4s; }
+}
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.inputBar {
+  @include flex(row, flex-start, center, $space-3);
+}
+
+.attachBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+.attachError {
+  color: #EF4444;
+  font-size: $fs-xs;
+  margin-bottom: $space-2;
+}
+
+.attachPreviewBar {
+  @include flex(row, flex-start, center, $space-3);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  margin-bottom: $space-3;
+}
+
+.attachPreviewThumb {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.attachPreviewName {
+  flex: 1;
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachRemoveBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: $space-1;
+
+  &:hover {
+    color: $error;
+  }
+}
+
+.attachmentImage {
+  display: block;
+  max-width: 220px;
+  border-radius: $radius-sm;
+  margin-bottom: $space-2;
+}
+
+.attachmentFileChip {
+  @include flex(row, flex-start, center, $space-2);
+  font-size: $fs-xs;
+  background: rgba(255, 255, 255, 0.15);
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  margin-bottom: $space-2;
+  width: fit-content;
+}
+
+.input {
+  @include input-base;
+  flex: 1;
+}
+
+.sendBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: $primary;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    background: $primary-dark;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,142 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.title {
+  font-size: $fs-xl;
+  margin-bottom: $space-6;
+}
+
+.tabs {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-5;
+}
+
+.tab {
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  font-size: $fs-sm;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+  background: var(--surface);
+
+  &--active {
+    background: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
+
+.form {
+  @include flex(row, flex-start, center, $space-3);
+  margin-bottom: $space-4;
+  flex-wrap: wrap;
+}
+
+.input {
+  @include input-base;
+  flex: 1;
+  min-width: 220px;
+}
+
+.sendBtn {
+  @include flex(row, center, center, $space-2);
+  background: $primary;
+  color: #fff;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-5;
+  font-size: $fs-sm;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.card {
+  @include card;
+  padding: $space-4;
+  margin-bottom: $space-3;
+  @include flex(row, space-between, center, $space-3);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.primaryText {
+  font-weight: 700;
+  font-size: $fs-sm;
+}
+
+.secondaryText {
+  font-size: $fs-xs;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+  white-space: nowrap;
+
+  &--pending {
+    background: #FFFBEB;
+    color: #B45309;
+  }
+
+  &--active {
+    background: $accent-tint;
+    color: $accent-dark;
+  }
+
+  &--declined {
+    background: #FEF2F2;
+    color: $error;
+  }
+}
+
+[data-theme='dark'] {
+  .badge--pending { background: rgba(#F59E0B, 0.15); }
+  .badge--active { background: rgba($accent, 0.15); }
+  .badge--declined { background: rgba($error, 0.15); }
+}
+
+.removeBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: $error;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  font-size: $fs-xs;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.emptyState,
+.loadingText {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+}
+
+.errorText {
+  color: $error;
+  font-size: $fs-sm;
+  margin-bottom: $space-3;
+}
+
+.successText {
+  color: $accent-dark;
+  font-size: $fs-sm;
+  margin-bottom: $space-3;
+}
