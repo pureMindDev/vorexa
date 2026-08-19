@@ -7,6 +7,7 @@ const { authLimiter, aiLimiter, apiLimiter } = require('./middleware/rateLimit')
 const connectDB = require('./config/db');
 const { initSocket } = require('./config/socket');
 const errorHandler = require('./middleware/errorHandler');
+const { corsOriginCheck } = require('./config/corsOrigins');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const courseRoutes = require('./routes/courseRoutes');
@@ -39,7 +40,7 @@ const app = express();
 connectDB();
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cors({ origin: corsOriginCheck, credentials: true }));
 app.use(express.json({ limit: '2mb' }));
 app.use('/api', apiLimiter);
 

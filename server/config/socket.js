@@ -2,6 +2,7 @@ const { Server } = require('socket.io');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Conversation = require('../models/Conversation');
+const { corsOriginCheck } = require('./corsOrigins');
 
 let io;
 
@@ -24,7 +25,7 @@ const getOtherParticipantIds = async (userId) => {
 const initSocket = (httpServer) => {
   io = new Server(httpServer, {
     cors: {
-      origin: process.env.CLIENT_URL,
+      origin: corsOriginCheck,
       credentials: true,
     },
   });

@@ -35,6 +35,7 @@ import StudyGroups from './pages/StudyGroups/StudyGroups';
 import CreateGroup from './pages/CreateGroup/CreateGroup';
 import GroupDetail from './pages/GroupDetail/GroupDetail';
 import TutorMarketplace from './pages/TutorMarketplace/TutorMarketplace';
+import BecomeTutor from './pages/BecomeTutor/BecomeTutor';
 import TutorProfileDetail from './pages/TutorProfileDetail/TutorProfileDetail';
 import MyBookings from './pages/MyBookings/MyBookings';
 import Profile from './pages/Profile/Profile';
@@ -152,6 +153,7 @@ function App() {
               <Route path="/live-classes/:id" element={<LiveClassRoom />} />
               <Route path="/tutors" element={<TutorMarketplace />} />
               <Route path="/tutors/:id" element={<TutorProfileDetail />} />
+              <Route path="/become-tutor" element={<BecomeTutor />} />
               <Route path="/bookings" element={<MyBookings />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/settings" element={<Settings />} />

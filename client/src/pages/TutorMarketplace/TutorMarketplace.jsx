@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiStar, FiCheckCircle, FiCalendar } from 'react-icons/fi';
 import { getTutors } from '../../services/tutorService';
+import { useAuth } from '../../context/AuthContext';
 import styles from './TutorMarketplace.module.scss';
 
 const SUBJECTS = ['All', 'English Language', 'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Government', 'Economics'];
 
 const TutorMarketplace = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [subject, setSubject] = useState('All');
   const [tutors, setTutors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +39,11 @@ const TutorMarketplace = () => {
           <p className={styles.subtitle}>Book one-on-one help from tutors in your subjects.</p>
         </div>
         <div className={styles.actionRow}>
+          {user?.role !== 'tutor' && (
+            <button className={styles.bookingsBtn} onClick={() => navigate('/become-tutor')}>
+              Become a tutor
+            </button>
+          )}
           <button className={styles.bookingsBtn} onClick={() => navigate('/bookings')}>
             <FiCalendar size={14} style={{ verticalAlign: '-2px', marginRight: '6px' }} />
             My bookings

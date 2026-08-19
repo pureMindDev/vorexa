@@ -103,7 +103,7 @@ const confirmPayment = async (req, res, next) => {
         link: '/bookings',
       });
 
-      await recordActivity(payment.studentId, XP_REWARDS.CBT_SUBMIT);
+      await recordActivity(payment.studentId, XP_REWARDS.BOOKING_PAID);
     }
 
     res.json({ message: 'Payment updated', payment });

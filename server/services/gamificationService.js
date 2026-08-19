@@ -7,6 +7,7 @@ const XP_REWARDS = {
   LESSON_COMPLETE: 20,
   CBT_SUBMIT: 30,
   AI_CHAT: 5,
+  BOOKING_PAID: 30,
 };
 
 const XP_PER_LEVEL = 100;
