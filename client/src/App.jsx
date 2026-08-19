@@ -1,8 +1,9 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import { CallProvider } from './context/CallContext';
 import { SocketProvider } from './context/SocketContext';
+import Landing from './pages/Landing/Landing';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import VerifyEmail from './pages/auth/VerifyEmail';
@@ -87,7 +88,7 @@ function App() {
       <AuthProvider>
         <SocketProvider>
           <CallProvider><Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/verify-email" element={<VerifyEmail />} />

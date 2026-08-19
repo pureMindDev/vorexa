@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import styles from './AuthLayout.module.scss';
 
@@ -5,7 +6,7 @@ const AuthLayout = ({ title, subtitle, children, footer }) => {
   return (
     <div className={styles.layout}>
       <div className={styles.brandSide}>
-        <span className={styles.logo}>Vorexa</span>
+        <Link to="/" className={styles.logo}>Vorexa</Link>
         <p className={styles.tagline}>
           Your all-in-one companion for JAMB, WAEC, and every step of your academic journey.
         </p>

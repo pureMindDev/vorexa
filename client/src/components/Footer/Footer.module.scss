@@ -1,0 +1,115 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: $space-12 $space-6 $space-8;
+}
+
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: $space-8;
+  padding-bottom: $space-8;
+
+  @include respond(md) {
+    grid-template-columns: 1fr 1fr;
+    row-gap: $space-8;
+  }
+
+  @include respond(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.logo {
+  font-family: $font-heading;
+  font-size: $fs-lg;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.brandNote {
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+.colTitle {
+  font-family: $font-heading;
+  font-size: $fs-xs;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: $space-4;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.linkList a,
+.linkList button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: $fs-sm;
+  text-align: left;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.bottom {
+  padding-top: $space-6;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+  flex-wrap: wrap;
+  color: var(--text-secondary);
+  font-size: $fs-xs;
+}
+
+.bottomLinks {
+  display: flex;
+  gap: $space-5;
+
+  a, button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    color: var(--text-secondary);
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
