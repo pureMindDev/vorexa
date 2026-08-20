@@ -134,10 +134,12 @@ const createLiveClass = async (req, res, next) => {
       if (!group.members.some((m) => m.userId.toString() === req.user._id.toString())) {
         return res.status(403).json({ message: 'You are not a member of this group' });
       }
-    } else {
+    } else if (centreId) {
       const membership = await CentreMember.findOne({ centreId, userId: req.user._id, status: 'active' });
       if (!membership) return res.status(403).json({ message: 'You are not an active member of this centre' });
     }
+    // else: a tutor scheduling with no booking/group/centre — an intentionally open class,
+    // no membership check needed (see comment above).
 
     const liveClass = await LiveClass.create({
       hostId: req.user._id,
