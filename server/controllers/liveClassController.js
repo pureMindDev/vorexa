@@ -104,6 +104,10 @@ const toSummary = (lc) => ({
 // @route   POST /api/live-classes
 const createLiveClass = async (req, res, next) => {
   try {
+    if (!['tutor', 'centre'].includes(req.user.role)) {
+      return res.status(403).json({ message: 'Only tutors and centres can schedule live classes' });
+    }
+
     const { title, subject, bookingId, groupId, centreId, scheduledFor, durationMinutes } = req.body;
 
     if (!title?.trim() || !scheduledFor) {
@@ -173,12 +177,24 @@ const getMyLiveClasses = async (req, res, next) => {
     const myGroups = await StudyGroup.find({ 'members.userId': req.user._id }).select('_id');
     const myCentreMemberships = await CentreMember.find({ userId: req.user._id, status: 'active' }).select('centreId');
 
+    // A tutor's "open" class (no booking/group/centre picked) is visible to any student with
+    // an accepted booking with that tutor — this has to mirror resolveAccess/getParticipantIds
+    // above, or a student can be granted access to a class they never see in their list.
+    const acceptedTutorBookings = await Booking.find({
+      studentId: req.user._id,
+      status: 'accepted',
+    }).select('tutorId');
+    const openClassHostIds = acceptedTutorBookings.map((b) => b.tutorId);
+
     const classes = await LiveClass.find({
       $or: [
         { hostId: req.user._id },
         { bookingId: { $in: myBookings.map((b) => b._id) } },
         { groupId: { $in: myGroups.map((g) => g._id) } },
         { centreId: { $in: myCentreMemberships.map((m) => m.centreId) } },
+        ...(openClassHostIds.length
+          ? [{ hostId: { $in: openClassHostIds }, bookingId: null, groupId: null, centreId: null }]
+          : []),
       ],
       status: { $ne: 'cancelled' },
     })

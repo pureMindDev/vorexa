@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { FiPlus, FiVideo, FiX } from 'react-icons/fi';
 import { getMyLiveClasses, createLiveClass } from '../../services/liveClassService';
 import { getGroups } from '../../services/groupService';
-import { getMyBookingsAsStudent } from '../../services/bookingService';
 import { getMyCentre } from '../../services/centreService';
 import { liveClassesBasePath } from '../../utils/roleRoutes';
 import { useAuth } from '../../context/AuthContext';
@@ -20,13 +19,13 @@ const LiveClasses = () => {
   const { socket } = useSocket();
   const isCentre = user?.role === 'centre';
   const isTutor = user?.role === 'tutor';
+  const canSchedule = isTutor || isCentre;
   const roomBasePath = liveClassesBasePath(user?.role);
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [groups, setGroups] = useState([]);
-  const [bookings, setBookings] = useState([]);
   const [centreId, setCentreId] = useState(null);
   const [form, setForm] = useState({ title: '', subject: '', scheduledFor: '', durationMinutes: 60, target: '' });
   const [saving, setSaving] = useState(false);
@@ -62,6 +61,7 @@ const LiveClasses = () => {
   }, [socket, load]);
 
   const openForm = async () => {
+    if (!canSchedule) return;
     setShowForm(true);
     if (isCentre) {
       try {
@@ -74,19 +74,9 @@ const LiveClasses = () => {
     }
     // Tutors don't need to pick a booking to schedule — an untied class is automatically
     // open to every student with an accepted booking with them (see the note in the form).
-    // Only fetch bookings for students, who do still need to pick one.
     try {
-      if (isTutor) {
-        const { data } = await getGroups({ mine: 'true' });
-        setGroups(data.groups);
-      } else {
-        const [groupsRes, bookingsRes] = await Promise.all([
-          getGroups({ mine: 'true' }),
-          getMyBookingsAsStudent(),
-        ]);
-        setGroups(groupsRes.data.groups);
-        setBookings((bookingsRes.data.bookings || []).filter((b) => b.status === 'accepted'));
-      }
+      const { data } = await getGroups({ mine: 'true' });
+      setGroups(data.groups);
     } catch {
       // form still usable with whatever loaded
     }
@@ -94,10 +84,9 @@ const LiveClasses = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    // Students still need to pick a group or booking; tutors don't — an untied class opens
-    // automatically to every student with an accepted booking with them.
-    if (!form.title.trim() || !form.scheduledFor || (!isCentre && !isTutor && !form.target)) {
-      setError('Please fill in a title, time, and choose a group or booking.');
+    if (!canSchedule) return;
+    if (!form.title.trim() || !form.scheduledFor) {
+      setError('Please fill in a title and time.');
       return;
     }
     setSaving(true);
@@ -112,8 +101,8 @@ const LiveClasses = () => {
       if (isCentre) {
         payload.centreId = centreId;
       } else if (form.target) {
-        const [type, targetId] = form.target.split(':');
-        payload[type === 'group' ? 'groupId' : 'bookingId'] = targetId;
+        const [, targetId] = form.target.split(':');
+        payload.groupId = targetId;
       }
       // else: tutor left it untied on purpose — open class, no groupId/bookingId sent.
       await createLiveClass(payload);
@@ -151,9 +140,11 @@ const LiveClasses = () => {
     <div>
       <div className={styles.header}>
         <h1 className={styles.title}>Live Classes</h1>
-        <button className={styles.scheduleBtn} onClick={openForm}>
-          <FiPlus size={15} /> Schedule
-        </button>
+        {canSchedule && (
+          <button className={styles.scheduleBtn} onClick={openForm}>
+            <FiPlus size={15} /> Schedule
+          </button>
+        )}
       </div>
 
       {error && <p className={styles.errorText}>{error}</p>}
@@ -203,22 +194,11 @@ const LiveClasses = () => {
                 onChange={(e) => setForm((f) => ({ ...f, target: e.target.value }))}
                 style={isCentre ? { display: 'none' } : undefined}
               >
-                <option value="">
-                  {isTutor ? 'Open to all your students (default) — or pick a group...' : 'Select a group or booking...'}
-                </option>
+                <option value="">Open to all your students (default) — or pick a group...</option>
                 {groups.length > 0 && (
                   <optgroup label="Study Groups">
                     {groups.map((g) => (
                       <option key={g.id} value={`group:${g.id}`}>{g.name}</option>
-                    ))}
-                  </optgroup>
-                )}
-                {!isTutor && bookings.length > 0 && (
-                  <optgroup label="Tutor Bookings">
-                    {bookings.map((b) => (
-                      <option key={b.id} value={`booking:${b.id}`}>
-                        {b.subject || 'Session'} with {b.tutorName}
-                      </option>
                     ))}
                   </optgroup>
                 )}
@@ -228,7 +208,7 @@ const LiveClasses = () => {
                   This class will be scheduled for all active members of your centre.
                 </p>
               )}
-              {isTutor && !form.target && (
+              {!isCentre && !form.target && (
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
                   Every student with an accepted booking with you will be able to join — no need to pick one.
                 </p>
